@@ -2,6 +2,7 @@ import { register, login } from "../services/auth.js";
 import Router from "express";
 import { createUserValidator } from "../validators/user.js";
 import useValidator from "../middlewares/useValidator.js";
+import { loginValidator } from "../validators/auth.js";
 
 const AUTH_ROUTER = Router();
 
