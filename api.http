@@ -1,5 +1,5 @@
 @BASE_URL = http://localhost:3000
-
+@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTM0Zjc3MmYzNjFkYjMzZDk5MzM4YTEiLCJpYXQiOjE3NjU3MDk2MjEsImV4cCI6MTc2NjMxNDQyMX0.2W6HqUM6ssTm1wMG767Ds_SxAHjmaf7xkf0AFhKm_UU
 ### Create a new user
 POST {{BASE_URL}}/users
 Content-Type: application/json
@@ -44,6 +44,21 @@ Content-Type: application/json
 {
 "email": "john.doe8@example.com",
   "password": "password"
+}
+
+###create a new trip
+POST {{BASE_URL}}/trips
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+{
+    "title": "Winter Vacation",
+    "startDate": "2023-12-20",
+    "endDate": "2023-12-30",
+    "budget": {
+        "total": 3000
+    },
+     "destinations": ["Switzerland"," Austria"]
 }
 
 ### Create a new trip

@@ -5,7 +5,7 @@ export const createTripValidator = [
     .trim()
     .notEmpty()
     .withMessage("Title is required")
-    .isDate()
+    .isString()
     .withMessage("Title must be a string"),
   body("startDate")
     .trim()

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import USER_ROUTER from "./users.js";
-import TRIP_ROUTER from "./trips.js";
+import TRIP_ROUTER from "./trip.js";
 import BAGGAGE_ROUTER from "./baggages.js";
 import AUTH_ROUTER from "./auth.js";
 

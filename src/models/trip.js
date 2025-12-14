@@ -22,7 +22,7 @@ const BudgetSchema = new Schema({
   },
   spent: {
     type: Number,
-    required: true,
+    default: 0,
   },
   expenses: [ExpenseSchema],
 });
