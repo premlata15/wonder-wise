@@ -58,6 +58,15 @@ const TripSchema = new Schema({
   ],
   budget: BudgetSchema,
 });
+TripSchema.pre("save", function (next) {
+  if (this.budget && this.budget.expenses) {
+    this.budget.spent = this.budget.expenses.reduce(
+      (Sum, expense) => Sum + expense.amount,
+      0
+    );
+  }
+  next();
+});
 
 const Trip = model("Trip", TripSchema);
 

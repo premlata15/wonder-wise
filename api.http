@@ -1,5 +1,6 @@
 @BASE_URL = http://localhost:3000
-@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTM0Zjc3MmYzNjFkYjMzZDk5MzM4YTEiLCJpYXQiOjE3NjU3MDk2MjEsImV4cCI6MTc2NjMxNDQyMX0.2W6HqUM6ssTm1wMG767Ds_SxAHjmaf7xkf0AFhKm_UU
+@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTNmNjdmMTAyZTI1NDJjZGNhNzUxMDQiLCJpYXQiOjE3NjU3NjMxNDQsImV4cCI6MTc2NjM2Nzk0NH0.jrzm29ZcV8zKo7xa_Hu2ymP9d6wAjoR1OZTal1FJ52s
+###eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTM0Zjc3MmYzNjFkYjMzZDk5MzM4YTEiLCJpYXQiOjE3NjU3MDk2MjEsImV4cCI6MTc2NjMxNDQyMX0.2W6HqUM6ssTm1wMG767Ds_SxAHjmaf7xkf0AFhKm_UU
 ### Create a new user
 POST {{BASE_URL}}/users
 Content-Type: application/json
@@ -32,8 +33,8 @@ POST {{BASE_URL}}/auth/register
 Content-Type: application/json
 
 {
-  "name": "Jihn Doe",
-  "email": "john.doe8@example.com",
+  "name": "Sanjha chy",
+  "email": "muskanchy15@example.com",
   "password": "password"
 }
 
@@ -42,7 +43,7 @@ POST {{BASE_URL}}/auth/login
 Content-Type: application/json
 
 {
-"email": "john.doe8@example.com",
+"email": "muskanchy15@example.com",
   "password": "password"
 }
 
@@ -52,42 +53,47 @@ Content-Type: application/json
 Authorization: Bearer {{TOKEN}}
 
 {
-    "title": "Winter Vacation",
-    "startDate": "2023-12-20",
-    "endDate": "2023-12-30",
-    "budget": {
-        "total": 3000
-    },
-     "destinations": ["Switzerland"," Austria"]
-}
-
-### Create a new trip
-POST {{BASE_URL}}/trips
-Content-Type: application/json
-
-{
-    "user": "691d5a389ea9d2820cb570d7",
-    "destination": "Mustang",
-    "startDate": "2025-12-01",
-    "endDate": "2025-12-05",
-    "participants": [
-        "691d5a389ea9d2820cb570d7",
-        "691da657bd7d5cd6d7393e5f"
-    ],
-    "notes": "This is a winter vacation plan.",
-    "status": "planned"
+  "title": "Kathmandu Trip",
+  "description": "Winter vacation",
+  "startDate": "2025-12-01",
+  "endDate": "2025-12-10",
+  "destinations": ["Kathmandu", "Pokhara"],
+  "budget": {
+    "total": 30000
+  }
 }
 ### Get all trips
 GET {{BASE_URL}}/trips
+Authorization: Bearer {{TOKEN}}
 ### Get trip by id
-GET {{BASE_URL}}/trips/6920f4e4f1e45c3b8c4d2a1
+GET {{BASE_URL}}/trips/693f68d102e2542cdca75107
+Authorization: Bearer {{TOKEN}}
 
 ### Update trip by id
-PATCH {{BASE_URL}}/trips/6920f4e4f1e45c3b8c4d2a1
+PATCH {{BASE_URL}}/trips/693f68d102e2542cdca75107
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
 {
-    "status": "completed"
+  "title": "Updated Kathmandu Trip",
+  "destinations": ["Kathmandu", "Pokhara", "Chitwan"],
+  "budget": {
+    "total": 35000
+  }
 }
+###expenses
+POST {{BASE_URL}}/trips/693f68d102e2542cdca75107/expenses
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "name": "Food",
+  "amount": 3000,
+  "date": "2025-12-03"
+}
+###Delete expense by id
+DELETE {{BASE_URL}}/trips/693f68d102e2542cdca75107/expenses/693f69e202e2542cdca7510f
+Authorization: Bearer {{TOKEN}}
 ### Delete trip by id
 DELETE {{BASE_URL}}/trips/6920f4e4f1e45c3b8c4d2a1
 ### Get all baggages
