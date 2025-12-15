@@ -59,7 +59,20 @@ Authorization: Bearer {{TOKEN}}
   "endDate": "2025-12-10",
   "destinations": ["Kathmandu", "Pokhara"],
   "budget": {
-    "total": 30000
+    "total": 30000,
+    "expenses": [
+      {
+        "name": "Flight",
+        "amount": 15000,
+        "date": "2025-11-15"
+      },
+      {
+        "name": "Hotel",
+        "amount": 10000,
+        "date": "2025-12-01"
+      }
+    
+    ]
   }
 }
 ### Get all trips
@@ -80,16 +93,6 @@ Authorization: Bearer {{TOKEN}}
   "budget": {
     "total": 35000
   }
-}
-###expenses
-POST {{BASE_URL}}/trips/693f68d102e2542cdca75107/expenses
-Authorization: Bearer {{TOKEN}}
-Content-Type: application/json
-
-{
-  "name": "Food",
-  "amount": 3000,
-  "date": "2025-12-03"
 }
 ###Delete expense by id
 DELETE {{BASE_URL}}/trips/693f68d102e2542cdca75107/expenses/693f69e202e2542cdca7510f

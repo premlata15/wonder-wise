@@ -58,14 +58,32 @@ const TripSchema = new Schema({
   ],
   budget: BudgetSchema,
 });
+
 TripSchema.pre("save", function (next) {
-  if (this.budget && this.budget.expenses) {
-    this.budget.spent = this.budget.expenses.reduce(
-      (Sum, expense) => Sum + expense.amount,
-      0
-    );
+  {
+    if (this.budget) {
+      this.budget.spent = this.budget.expenses.reduce(
+        (acc, expense) => acc + expense.amount,
+        0
+      );
+      console.log("Calculated spent on save:", this.budget.spent);
+    }
+    next();
   }
-  next();
+});
+
+TripSchema.pre("findOneAndUpdate", function () {
+  if (this.getUpdate().budget) {
+    this.getUpdate().budget.spent +=
+      this.getUpdate().budget?.expenses?.reduce(
+        (acc, expense) => acc + expense.amount,
+        0
+      ) || 0;
+    console.log("Updated spent:", this.getUpdate().budget.spent);
+    this.getUpdate().budget.expenses?.map((expense) => {
+      expense.date = new Date();
+    });
+  }
 });
 
 const Trip = model("Trip", TripSchema);
