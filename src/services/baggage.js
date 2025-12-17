@@ -1,67 +1,52 @@
-import NotFoundError from "../errors/not-found-error.js";
 import Baggage from "../models/baggage.js";
-/**
- * Create a new Baggage.
- * Expects baggageData to contain at least: trip, name, completed (completed is boolean)
- */
-const createBaggage = async (baggageData) => {
-  const normalized = {
-    ...(baggageData.trip && { trip: baggageData.trip }),
-    ...(baggageData.name && { name: baggageData.name }),
-    ...(typeof baggageData.completed === "boolean" && {
-      completed: baggageData.completed,
-    }),
-  };
-  const baggage = await Baggage.create(normalized);
-  return baggage.toObject();
-};
-/**
- * Find all baggages.
- * Optionally you can pass a filter object (e.g. { trip: tripId }) in the future.
- *  */
-const findAllBaggages = async (filter = {}) => {
-  // exclude nothing here (baggages usually don't have a password). Optionally populate trip.
-  const baggages = await Baggage.find(filter).populate(
-    "trip",
-    "destination startDate endDate"
-  );
-  return baggages;
-};
-/**
- * Find a baggage by id.
- * Throws NotFoundError if not found.
- */
-const findBaggageById = async (id) => {
-  const baggage = await Baggage.findById(id).populate(
-    "trip",
-    "destination startDate endDate"
-  );
-  if (!baggage) {
-    throw new NotFoundError("Baggage not found");
-  }
+import NotFoundError from "../errors/not-found-error.js";
+
+export const createBaggage = async (baggageData) => {
+  await getTripById(baggageData.trip, baggageData.user);
+  const baggage = await Baggage.create(baggageData);
   return baggage;
 };
-/**
- * Update a baggage by id.
- * Accepts partial baggageData. Runs schema validators.
- * */
-const updateBaggageById = async (id, baggageData) => {
-  // Build update object only with allowed fields
-  const update = {
-    ...(baggageData.name && { name: baggageData.name }),
-    ...(typeof baggageData.completed === "boolean" && {
-      completed: baggageData.completed,
-    }),
-    // trip typically shouldn't be changed via update, but if you want:
-    ...(baggageData.trip && { trip: baggageData.trip }),
-  };
-  const baggage = await Baggage.findByIdAndUpdate(id, update, {
-    new: true,
-    runValidators: true,
+
+export const getAllBaggages = async (tripId, userId) => {
+  const baggages = await Baggage.find({ trip: tripId, user: userId });
+  return baggages;
+};
+
+export const getBaggageById = async (id, userId, tripId) => {
+  const baggage = await Baggage.findOne({
+    _id: id,
+    user: userId,
+    trip: tripId,
   });
   if (!baggage) {
     throw new NotFoundError("Baggage not found");
   }
   return baggage;
 };
-export { createBaggage, findAllBaggages, findBaggageById, updateBaggageById };
+
+export const updateBaggage = async (id, userId, tripId, baggageData) => {
+  await getTripById(tripId, userId);
+  const baggage = await Baggage.findOneAndUpdate(
+    { _id: id, user: userId, trip: tripId },
+    baggageData,
+    {
+      new: true,
+    }
+  );
+  if (!baggage) {
+    throw new NotFoundError("Baggage not found");
+  }
+  return baggage;
+};
+
+export const deleteBaggage = async (id, userId, tripId) => {
+  const baggage = await Baggage.findOneAndDelete({
+    _id: id,
+    user: userId,
+    trip: tripId,
+  });
+  if (!baggage) {
+    throw new NotFoundError("Baggage not found");
+  }
+  return baggage;
+};
