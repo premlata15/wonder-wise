@@ -1,6 +1,6 @@
 import Itinerary from "../models/Itinerary.js";
 import NotFoundError from "../errors/not-found-error.js";
-import ValidationError from "../errors/validation-error.js";
+import ValidationError from "../errors/Validation.js";
 import { getTripById } from "./trips.js";
 
 export const createItinerary = async (itineraryData) => {

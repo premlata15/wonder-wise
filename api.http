@@ -1,7 +1,6 @@
 @BASE_URL = http://localhost:3000
-@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTNmNjdmMTAyZTI1NDJjZGNhNzUxMDQiLCJpYXQiOjE3NjU3NjMxNDQsImV4cCI6MTc2NjM2Nzk0NH0.jrzm29ZcV8zKo7xa_Hu2ymP9d6wAjoR1OZTal1FJ52s
-###eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTM0Zjc3MmYzNjFkYjMzZDk5MzM4YTEiLCJpYXQiOjE3NjU3MDk2MjEsImV4cCI6MTc2NjMxNDQyMX0.2W6HqUM6ssTm1wMG767Ds_SxAHjmaf7xkf0AFhKm_UU
-### Create a new user
+@userID=
+@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTNmNjdmMTAyZTI1NDJjZGNhNzUxMDQiLCJpYXQiOjE3NjYwNTUxNTUsImV4cCI6MTc2NjY1OTk1NX0.8Crk6VpCQFfqUZW4D81rxoAsMqQSHokwPHSb0EcQIuM
 POST {{BASE_URL}}/users
 Content-Type: application/json
 
@@ -12,7 +11,8 @@ Content-Type: application/json
 }
 
 ### Get all users
-GET {{BASE_URL}}/users
+GET {{BASE_URL}}/users?limit=4&page=2&search=muskan&order=asc
+Authorization: Bearer {{TOKEN}}
 
 ### Get user by id
 GET {{BASE_URL}}/users/691ee5dba233ff5784b89949

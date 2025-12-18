@@ -1,50 +1,32 @@
-import Baggage from "../models/baggage.js";
-import NotFoundError from "../errors/not-found-error.js";
+import { Schema, model } from "mongoose";
 
-export const createBaggage = async (baggageData) => {
-  const baggage = await Baggage.create(baggageData);
-  return baggage;
-};
-
-export const getAllBaggages = async (tripId, userId) => {
-  const baggages = await Baggage.find({ trip: tripId, user: userId });
-  return baggages;
-};
-
-export const getBaggageById = async (id, userId, tripId) => {
-  const baggage = await Baggage.findOne({
-    _id: id,
-    user: userId,
-    trip: tripId,
-  });
-  if (!baggage) {
-    throw new NotFoundError("Baggage not found");
+const BaggageSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
+    trip: {
+      type: Schema.Types.ObjectId,
+      ref: "Trip",
+      required: true,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
   }
-  return baggage;
-};
+);
 
-export const updateBaggage = async (id, userId, tripId, baggageData) => {
-  const baggage = await Baggage.findOneAndUpdate(
-    { _id: id, user: userId, trip: tripId },
-    baggageData,
-    {
-      new: true,
-    }
-  );
-  if (!baggage) {
-    throw new NotFoundError("Baggage not found");
-  }
-  return baggage;
-};
+const Baggage = model("Baggage", BaggageSchema);
 
-export const deleteBaggage = async (id, userId, tripId) => {
-  const baggage = await Baggage.findOneAndDelete({
-    _id: id,
-    user: userId,
-    trip: tripId,
-  });
-  if (!baggage) {
-    throw new NotFoundError("Baggage not found");
-  }
-  return baggage;
-};
+export default Baggage;

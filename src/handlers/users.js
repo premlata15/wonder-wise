@@ -29,7 +29,7 @@ USER_ROUTER.post(
 
 USER_ROUTER.get("/", async (req, res, next) => {
   try {
-    const users = await getAllUsers();
+    const users = await getAllUsers(req.query);
     res.status(200).json(users);
   } catch (err) {
     next(err);

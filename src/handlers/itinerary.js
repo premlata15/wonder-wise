@@ -6,7 +6,7 @@ import {
   updateItinerary,
   deleteItinerary,
 } from "../services/itinerary.js";
-import { useValidator } from "../middlewares/validator.js";
+import useValidator from "../middlewares/usevalidator.js";
 import {
   createItineraryValidator,
   updateItineraryValidator,
