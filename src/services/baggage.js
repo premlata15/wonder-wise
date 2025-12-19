@@ -1,5 +1,6 @@
 import Baggage from "../models/baggage.js";
 import NotFoundError from "../errors/not-found-error.js";
+import { getTripById } from "./trips.js";
 
 export const createBaggage = async (baggageData) => {
   await getTripById(baggageData.trip, baggageData.user);

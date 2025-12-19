@@ -9,7 +9,7 @@ const HANDLERS = Router();
 
 HANDLERS.use("/users", USER_ROUTER);
 HANDLERS.use("/trips", TRIP_ROUTER);
-HANDLERS.use("/baggages", BAGGAGE_ROUTER);
+HANDLERS.use("/:tripId/baggages", BAGGAGE_ROUTER);
 HANDLERS.use("/itineraries", ITINERARY_ROUTER);
 HANDLERS.use("/auth", AUTH_ROUTER);
 

@@ -12,7 +12,7 @@ import {
   updateBagaggeValidator,
 } from "../validators/baggage.js";
 
-const BAGGAGE_ROUTER = Router();
+const BAGGAGE_ROUTER = Router({ mergeParams: true });
 
 BAGGAGE_ROUTER.post(
   "/",
@@ -53,7 +53,7 @@ BAGGAGE_ROUTER.get("/:id", async (req, res, next) => {
   }
 });
 
-BAGGAGE_ROUTER.put(
+BAGGAGE_ROUTER.patch(
   "/:id",
   useValidator(updateBagaggeValidator),
   async (req, res, next) => {

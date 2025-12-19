@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Get all users
-GET {{BASE_URL}}/users?limit=4&page=2&search=muskan&order=asc
+GET {{BASE_URL}}/users?limit=4&search=muskan&sort=name&order=asc
 Authorization: Bearer {{TOKEN}}
 
 ### Get user by id
@@ -79,7 +79,7 @@ Authorization: Bearer {{TOKEN}}
 GET {{BASE_URL}}/trips
 Authorization: Bearer {{TOKEN}}
 ### Get trip by id
-GET {{BASE_URL}}/trips/693f68d102e2542cdca75107
+GET {{BASE_URL}}/trips/69452879454b4bc6ec7a1b41
 Authorization: Bearer {{TOKEN}}
 
 ### Update trip by id
@@ -100,28 +100,32 @@ Authorization: Bearer {{TOKEN}}
 ### Delete trip by id
 DELETE {{BASE_URL}}/trips/6920f4e4f1e45c3b8c4d2a1
 ### Get all baggages
-POST {{BASE_URL}}/baggages
+### Create baggage for a trip
+POST {{BASE_URL}}/69452879454b4bc6ec7a1b41/baggages 
+Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
 
 {
-    "trip": "691fd1c2613653cecb2f3e3f",
-    "name": "bag2",
-    "completed": false
+  "name": "Backpack"
+ 
 }
 
 ### Get all baggages
-GET {{BASE_URL}}/baggages
+GET {{BASE_URL}}/69452879454b4bc6ec7a1b41/baggages
+Authorization: Bearer {{TOKEN}} 
 ### Get baggage by id
 GET {{BASE_URL}}/baggages/691fd1c2613653cecb2f3e3f
 ### Update baggage by id
-PATCH {{BASE_URL}}/baggages/693167a3fb92065a96b056d5
+PATCH {{BASE_URL}}/69452879454b4bc6ec7a1b41/baggages/69452efd42dfbed2c37187cd
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
+  "name": "Updated Backpack",
     "completed": true
 }
 ### Delete baggage by id
-DELETE {{BASE_URL}}/baggages/693167a3fb92065a96b056d5
+DELETE {{BASE_URL}}/baggages/693167a3fb92065a96b056d5/
 
 
 
