@@ -114,7 +114,8 @@ Content-Type: application/json
 GET {{BASE_URL}}/69452879454b4bc6ec7a1b41/baggages
 Authorization: Bearer {{TOKEN}} 
 ### Get baggage by id
-GET {{BASE_URL}}/baggages/691fd1c2613653cecb2f3e3f
+GET {{BASE_URL}}/baggages/
+Authorization: Bearer {{TOKEN}}
 ### Update baggage by id
 PATCH {{BASE_URL}}/69452879454b4bc6ec7a1b41/baggages/69452efd42dfbed2c37187cd
 Content-Type: application/json
@@ -126,6 +127,26 @@ Authorization: Bearer {{TOKEN}}
 }
 ### Delete baggage by id
 DELETE {{BASE_URL}}/baggages/693167a3fb92065a96b056d5/
+
+###Itenarys
+### Create itenary for a trip
+POST {{BASE_URL}}/69452879454b4bc6ec7a1b41/itenarys
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "title": "Day 1 in Kathmandu",
+  "activities": [
+    {
+      "time": "10:00 AM",
+      "description": "Visit Pashupatinath Temple"
+    },
+    {
+      "time": "1:00 PM",
+      "description": "Lunch at local restaurant"
+    }
+  ]
+}
 
 
 
