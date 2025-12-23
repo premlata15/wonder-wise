@@ -65,5 +65,17 @@ TRIP_ROUTER.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+TripRouter.post("/:id/invite", async (req, res, next) => {
+  try {
+    const result = await inviteCollaborator(
+      req.params.id,
+      req.user.userId,
+      collaboratorEmails
+    );
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default TRIP_ROUTER;

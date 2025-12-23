@@ -1,6 +1,24 @@
 //send mail using nodemailer with google smtp
 import nodemailer from "nodemailer";
-const sendMail = async (to, subject, text) => {
+import path from "path";
+import fs from "fs";
+
+const sendMail = async (to, subject, data) => {
+  const templatePath = path.join(
+    process.cwd(),
+    "src",
+    "templates",
+    "accept-invite.html"
+  );
+  let html = fs.readFileSync(templatePath, "utf-8");
+
+  html = html
+    .replace("{{link}}", data.link)
+    .replace("{{title}}", data.title)
+    .replace("{{startDate}}", data.startDate)
+    .replace("{{endDate}}", data.endDate)
+    .replace("{{userName}}", data.userName);
+
   const transporter = nodemailer.createTransport({
     service: process.env.SMTP_SERVICE,
     auth: {
@@ -8,16 +26,12 @@ const sendMail = async (to, subject, text) => {
       pass: process.env.SMTP_PASSWORD,
     },
   });
+
   await transporter.sendMail({
     from: process.env.SMTP_USER,
     to,
     subject,
-    text,
+    html,
   });
 };
-sendMail(
-  "chaudharymuskan94@gmail.com",
-  "Test Subject",
-  "This is a test email."
-);
 export default sendMail;
