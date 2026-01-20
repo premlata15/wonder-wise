@@ -13,11 +13,11 @@ const sendMail = async (to, subject, data) => {
   let html = fs.readFileSync(templatePath, "utf-8");
 
   html = html
-    .replace("{{link}}", data.link)
-    .replace("{{title}}", data.title)
-    .replace("{{startDate}}", data.startDate)
-    .replace("{{endDate}}", data.endDate)
-    .replace("{{userName}}", data.userName);
+    .replace("{{ link }}", data.link)
+    .replace("{{ title }}", data.title)
+    .replace("{{ startDate }}", data.startDate)
+    .replace("{{ endDate }}", data.endDate)
+    .replace("{{ userName }}", data.userName);
 
   const transporter = nodemailer.createTransport({
     service: process.env.SMTP_SERVICE,

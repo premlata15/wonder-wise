@@ -1,6 +1,6 @@
 @BASE_URL = http://localhost:3000
 @userID=
-@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTNmNjdmMTAyZTI1NDJjZGNhNzUxMDQiLCJpYXQiOjE3NjYwNTUxNTUsImV4cCI6MTc2NjY1OTk1NX0.8Crk6VpCQFfqUZW4D81rxoAsMqQSHokwPHSb0EcQIuM
+@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTRiYzZmODg2Y2ZjZTVkZDEzMGE1ODEiLCJpYXQiOjE3NjY1NzM4MTcsImV4cCI6MTc2NzE3ODYxN30.Uby2z3IKoeXVOX0LDaAsMhSFycfllflx3yqartMpOm0
 POST {{BASE_URL}}/users
 Content-Type: application/json
 
@@ -33,8 +33,8 @@ POST {{BASE_URL}}/auth/register
 Content-Type: application/json
 
 {
-  "name": "Sanjha chy",
-  "email": "muskanchy15@example.com",
+  "name": "Mina chy",
+  "email": "Minachy15@example.com",
   "password": "password"
 }
 
@@ -43,7 +43,7 @@ POST {{BASE_URL}}/auth/login
 Content-Type: application/json
 
 {
-"email": "muskanchy15@example.com",
+"email": "Minachy15@example.com",
   "password": "password"
 }
 
@@ -53,11 +53,11 @@ Content-Type: application/json
 Authorization: Bearer {{TOKEN}}
 
 {
-  "title": "Kathmandu Trip",
+  "title": "Mustang Trip",
   "description": "Winter vacation",
   "startDate": "2025-12-01",
   "endDate": "2025-12-10",
-  "destinations": ["Kathmandu", "Pokhara"],
+  "destinations": ["Mustang", "Pokhara"],
   "budget": {
     "total": 30000,
     "expenses": [
@@ -79,7 +79,7 @@ Authorization: Bearer {{TOKEN}}
 GET {{BASE_URL}}/trips
 Authorization: Bearer {{TOKEN}}
 ### Get trip by id
-GET {{BASE_URL}}/trips/69452879454b4bc6ec7a1b41
+GET {{BASE_URL}}/trips/694bc76a86cfce5dd130a584
 Authorization: Bearer {{TOKEN}}
 
 ### Update trip by id
@@ -101,12 +101,13 @@ Authorization: Bearer {{TOKEN}}
 DELETE {{BASE_URL}}/trips/6920f4e4f1e45c3b8c4d2a1
 ### Get all baggages
 ### Create baggage for a trip
-POST {{BASE_URL}}/69452879454b4bc6ec7a1b41/baggages 
+POST {{BASE_URL}}/694bc76a86cfce5dd130a584/baggages 
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
 
 {
-  "name": "Backpack"
+  "name": "makeup",
+  "completed":true
  
 }
 
@@ -148,6 +149,14 @@ Content-Type: application/json
   ]
 }
 
+### Get all itenary for a trip
 
+POST {{BASE_URL}}/trips/694bc79586cfce5dd130a591/invite
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
 
+{
+  "collaboratorEmails": ["chaudharymuskan94@gmail.com",
+  "bishwasaavash@gmail.com"]
+}
 

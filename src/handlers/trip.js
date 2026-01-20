@@ -5,6 +5,7 @@ import {
   getTripById,
   updateTrip,
   deleteTrip,
+  inviteCollaborator,
 } from "../services/trips.js";
 import {
   createTripValidator,
@@ -65,12 +66,12 @@ TRIP_ROUTER.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
-TripRouter.post("/:id/invite", async (req, res, next) => {
+TRIP_ROUTER.post("/:id/invite", async (req, res, next) => {
   try {
     const result = await inviteCollaborator(
       req.params.id,
       req.user.userId,
-      collaboratorEmails
+      req.body.collaboratorEmails
     );
     res.json(result);
   } catch (error) {

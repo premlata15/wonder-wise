@@ -3,17 +3,27 @@ import connectDB from "./config/db.js";
 import HANDLERS from "./handlers/index.js";
 import errorMiddleware from "./middlewares/error.js";
 import { authMiddleware } from "./middlewares/auth.js";
+import cors from "cors";
 
 const APP_SERVER = express();
 const PORT = process.env.PORT;
 connectDB()
   .then(() => {})
   .catch(() => {});
+APP_SERVER.use(
+  cors({
+    origin: process.env.BASE_URL || "http://localhost:5173", // Replace with your frontend URL
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  }),
+);
 
 APP_SERVER.get("/", (req, res) => {
   res.send("Welcome to Wander Wise API");
 });
 APP_SERVER.use(express.json());
+APP_SERVER.use(cors());
 APP_SERVER.use(authMiddleware);
 APP_SERVER.use("/", HANDLERS);
 APP_SERVER.use(errorMiddleware);
