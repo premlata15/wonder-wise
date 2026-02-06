@@ -1,4 +1,4 @@
-import Itinerary from "../models/Itinerary.js";
+import Itinerary from "../models/itinerary.js";
 import NotFoundError from "../errors/not-found-error.js";
 import ValidationError from "../errors/Validation.js";
 import { getTripById } from "./trips.js";
