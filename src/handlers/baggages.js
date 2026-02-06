@@ -6,7 +6,7 @@ import {
   updateBaggage,
   deleteBaggage,
 } from "../services/baggage.js";
-import useValidator from "../middlewares/usevalidator.js";
+import useValidator from "../middlewares/useValidator.js";
 import {
   createBagaggeValidator,
   updateBagaggeValidator,
@@ -28,7 +28,7 @@ BAGGAGE_ROUTER.post(
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 BAGGAGE_ROUTER.get("/", async (req, res, next) => {
@@ -45,7 +45,7 @@ BAGGAGE_ROUTER.get("/:id", async (req, res, next) => {
     const baggage = await getBaggageById(
       req.params.id,
       req.user.userId,
-      req.params.tripId
+      req.params.tripId,
     );
     res.status(200).json(baggage);
   } catch (error) {
@@ -62,13 +62,13 @@ BAGGAGE_ROUTER.patch(
         req.params.id,
         req.user.userId,
         req.params.tripId,
-        req.body
+        req.body,
       );
       res.status(200).json(baggage);
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 BAGGAGE_ROUTER.delete("/:id", async (req, res, next) => {
@@ -76,7 +76,7 @@ BAGGAGE_ROUTER.delete("/:id", async (req, res, next) => {
     const baggage = await deleteBaggage(
       req.params.id,
       req.user.userId,
-      req.params.tripId
+      req.params.tripId,
     );
     res.status(200).json(baggage);
   } catch (error) {

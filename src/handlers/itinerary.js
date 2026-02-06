@@ -6,7 +6,7 @@ import {
   updateItinerary,
   deleteItinerary,
 } from "../services/itinerary.js";
-import useValidator from "../middlewares/usevalidator.js";
+import useValidator from "../middlewares/useValidator.js";
 import {
   createItineraryValidator,
   updateItineraryValidator,
@@ -24,14 +24,14 @@ ITINERARY_ROUTER.post(
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 ITINERARY_ROUTER.get("/", async (req, res, next) => {
   try {
     const itineraries = await getAllItineraries(
       req.params.tripId,
-      req.user._id
+      req.user._id,
     );
     res.json(itineraries);
   } catch (error) {
@@ -44,7 +44,7 @@ ITINERARY_ROUTER.get("/:id", async (req, res, next) => {
     const itinerary = await getItineraryById(
       req.params.id,
       req.user._id,
-      req.params.tripId
+      req.params.tripId,
     );
     res.json(itinerary);
   } catch (error) {
@@ -61,13 +61,13 @@ ITINERARY_ROUTER.patch(
         req.params.id,
         req.user._id,
         req.params.tripId,
-        req.body
+        req.body,
       );
       res.json(itinerary);
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 ITINERARY_ROUTER.delete("/:id", async (req, res, next) => {
@@ -75,7 +75,7 @@ ITINERARY_ROUTER.delete("/:id", async (req, res, next) => {
     const itinerary = await deleteItinerary(
       req.params.id,
       req.user._id,
-      req.params.tripId
+      req.params.tripId,
     );
     res.json(itinerary);
   } catch (error) {
