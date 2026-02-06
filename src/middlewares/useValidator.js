@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import ValidationError from "../errors/Validation.js";
+import ValidationError from "../errors/validation.js";
 
 const useValidator =
   (validators = []) =>
