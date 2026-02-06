@@ -1,4 +1,4 @@
-import ValidationError from "../errors/Validation.js";
+import ValidationError from "../errors/validation.js";
 const errorMiddleware = (err, _, res, __) => {
   if (err instanceof ValidationError) {
     return res.status(err.statusCode).json({
